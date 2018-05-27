@@ -1,0 +1,13 @@
+{
+  "name": "UW MyPlan Enhancer",
+  "version": "1",
+  "manifest_version": 2,
+  "permissions": [
+    "https://search.mtvnservices.com/typeahead/suggest/*"
+  ],
+  "content_scripts": [{
+    "matches": ["https://myplan.uw.edu/course/*"],
+    "js": ["jquery-3.3.1.min.js", "main.js"],
+    "css": ["style.css"]
+  }]
+}

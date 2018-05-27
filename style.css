@@ -1,0 +1,55 @@
+/* Adds more room for larger screen sizes */
+div.app-wrapper {
+    max-width: 1600px;
+}
+
+/* Checkboxes in Filter column */
+fieldset.facet-group {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* The inserted instructor name */
+div.instructor-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 95%;
+}
+
+/* Columns in Courses list */
+span.course-code {
+    width: 10% !important;
+    float: left;
+}
+span.course-title {
+    width: 33% !important;
+    float: left;
+}
+span.course-term {
+    width: 7% !important;
+    float: left;
+}
+span.course-credit {
+    width: 7% !important;
+    float: left;
+}
+span.course-genedureqs {
+    width: 14% !important;
+    float: left;
+}
+span.course-instructor {
+    width: 16%;
+    float: left;
+}
+span.instructor-overall-quality {
+    width: 4%;
+    float: left;
+}
+span.instructor-level-of-difficulty {
+    width: 4%;
+    float: left;
+}
+span.instructor-would-take-again {
+    width: 5%;
+}
