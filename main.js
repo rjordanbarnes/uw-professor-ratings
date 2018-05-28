@@ -163,11 +163,11 @@ function insertColumnData() {
                     $(instructorSpan).append("<div class='instructor-name'><a href='http://www.ratemyprofessors.com/ShowRatings.jsp?tid=" +  response.docs[0].pk_id + "' target='_blank'>" + instructor + "</a></div>");
                 }
 
-                if (instructors[instructor].overallQuality === undefined || instructors[instructor].overallQuality === 0)
-                    instructors[instructor].overallQuality = "n/a";
+                if (instructors[instructor].overallQuality === 0 || isNaN(instructors[instructor].overallQuality))
+                    instructors[instructor].overallQuality = "-";
 
-                if (instructors[instructor].levelOfDifficulty === undefined || instructors[instructor].levelOfDifficulty === 0)
-                    instructors[instructor].levelOfDifficulty = "n/a";
+                if (instructors[instructor].levelOfDifficulty === 0 || isNaN(instructors[instructor].levelOfDifficulty))
+                    instructors[instructor].levelOfDifficulty = "-";
 
                 let overallQualityColorClass = "";
                 let levelOfDifficultyColorClass = "";
