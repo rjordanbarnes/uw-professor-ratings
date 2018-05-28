@@ -17,13 +17,35 @@ div.instructor-name {
     width: 95%;
 }
 
+/* Remove padding on right side of search results */
+.search-results .list-group .list-group-item {
+    padding-right: 0;
+}
+.search-results .results-heading {
+    padding-right: 0;
+}
+
+/* Color classes for Level of Difficulty and Overall Quality */
+.rmp-best {
+    color: #0F9246;
+}
+.rmp-great {
+    color: #7DBB42;
+}
+.rmp-okay {
+    color: #F68E1F;
+}
+.rmp-bad {
+    color: #BC2026;
+}
+
 /* Columns in Courses list */
 span.course-code {
     width: 10% !important;
     float: left;
 }
 span.course-title {
-    width: 33% !important;
+    width: 34% !important;
     float: left;
 }
 span.course-term {
@@ -31,7 +53,7 @@ span.course-term {
     float: left;
 }
 span.course-credit {
-    width: 7% !important;
+    width: 5% !important;
     float: left;
 }
 span.course-genedureqs {
@@ -39,7 +61,7 @@ span.course-genedureqs {
     float: left;
 }
 span.course-instructor {
-    width: 16%;
+    width: 18%;
     float: left;
 }
 span.instructor-overall-quality {
@@ -50,6 +72,6 @@ span.instructor-level-of-difficulty {
     width: 4%;
     float: left;
 }
-span.instructor-would-take-again {
-    width: 5%;
+span.instructor-number-of-reviews {
+    width: 4%;
 }
