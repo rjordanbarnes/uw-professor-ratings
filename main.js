@@ -7,9 +7,9 @@ $(document).ready(function() {
 });
 
 function enableClickHandlers() {
-    $("button.btn-primary").unbind("click");
+    $("button.btn").unbind("click");
     $("div.checkbox").unbind("click");
-    $("button.btn-primary").click(waitForCourses);
+    $("button.btn").click(waitForCourses);
     $("div.checkbox").click(waitForCourses);
 }
 
