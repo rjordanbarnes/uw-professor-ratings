@@ -3,11 +3,16 @@
   "version": "1",
   "manifest_version": 2,
   "permissions": [
+    "webRequest",
+    "https://myplan.uw.edu/course/api/courses",
     "https://search.mtvnservices.com/typeahead/suggest/*"
   ],
   "content_scripts": [{
     "matches": ["https://myplan.uw.edu/course/*"],
     "js": ["jquery-3.3.1.min.js", "main.js"],
     "css": ["style.css"]
-  }]
+  }],
+  "background": {
+    "scripts": ["background.js"]
+  }
 }

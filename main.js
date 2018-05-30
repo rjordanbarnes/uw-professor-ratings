@@ -1,16 +1,32 @@
 let waitingForCourses = false;
 let ajaxRequests = [];
 
-$(document).ready(function() {
-    enableClickHandlers();
-    waitForCourses();
+// Listens for background script to request a refresh.
+chrome.runtime.onMessage.addListener( function(request) {
+    if (request.refresh) {
+        cancelAllAPIRequests();
+        waitForCourses();
+    }
 });
 
+// Clicking certain page elements should cause a refresh, for example Filters.
 function enableClickHandlers() {
-    $("button.btn").unbind("click");
-    $("div.checkbox").unbind("click");
-    $("button.btn").click(waitForCourses);
-    $("div.checkbox").click(waitForCourses);
+    const elements = ["div.checkbox", "button.btn"];
+
+    elements.forEach(function(element) {
+        $(element).unbind("click");
+        $(element).click(function() {
+            cancelAllAPIRequests();
+            waitForCourses();
+        });
+    });
+}
+
+// Clear current ajax requests.
+function cancelAllAPIRequests() {
+    ajaxRequests.forEach(function(request) {
+        request.abort();
+    });
 }
 
 // Calls main logic once the Courses table is visible on Find Courses page
@@ -18,22 +34,17 @@ function waitForCourses() {
     if (waitingForCourses)
         return;
 
-    // Clear current ajax requests, otherwise search is unresponsive until they complete.
-    for (const i in ajaxRequests) {
-        ajaxRequests[i].abort();
-    }
-
     waitingForCourses = true;
     const watch = setInterval(function() {
         if ($("div.search-heading").length && $(".Loader__background").length < 1) {
             clearInterval(watch);
             waitingForCourses = false;
-            onCoursesVisible();
+            refreshResults();
         }
     }, 100);
 }
 
-function onCoursesVisible() {
+function refreshResults() {
     enableClickHandlers();
     applyStyles();
 
