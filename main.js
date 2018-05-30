@@ -1,6 +1,8 @@
 let waitingForCourses = false;
 let ajaxRequests = [];
 
+enableClickHandlers();
+
 // Listens for background script to request a refresh.
 chrome.runtime.onMessage.addListener( function(request) {
     if (request.refresh) {
@@ -9,15 +11,20 @@ chrome.runtime.onMessage.addListener( function(request) {
     }
 });
 
-// Clicking certain page elements should cause a refresh, for example Filters.
+// Clicking certain page elements should refresh and/or cancel API requests, for example Filters.
 function enableClickHandlers() {
-    const elements = ["div.checkbox", "button.btn"];
+    const elementsToRefresh = ["div.checkbox", "button.btn"];
+    const elementsToCancelRequests = ["div.checkbox", "button.btn", "a span.course-code", "a span.course-title"];
 
-    elements.forEach(function(element) {
-        $(element).unbind("click");
-        $(element).click(function() {
-            cancelAllAPIRequests();
+    elementsToRefresh.forEach(function(element) {
+        $("body").on("click", element, function() {
             waitForCourses();
+        });
+    });
+
+    elementsToCancelRequests.forEach(function(element) {
+        $("body").on("click", element, function() {
+            cancelAllAPIRequests();
         });
     });
 }
@@ -45,7 +52,6 @@ function waitForCourses() {
 }
 
 function refreshResults() {
-    enableClickHandlers();
     applyStyles();
 
     // Only inserts column headers if necessary.
