@@ -4,8 +4,7 @@
   "manifest_version": 2,
   "permissions": [
     "webRequest",
-    "https://myplan.uw.edu/course/api/courses",
-    "https://search.mtvnservices.com/typeahead/suggest/*"
+    "https://myplan.uw.edu/course/api/courses"
   ],
   "content_scripts": [{
     "matches": ["https://myplan.uw.edu/course/*"],
