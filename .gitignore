@@ -123,9 +123,3 @@ fabric.properties
 
 # Sonarlint plugin
 .idea/sonarlint
-
-# Project
-dist/
-config/sql.config.js
-config/token.config.js
-config/googleoath.config.js
