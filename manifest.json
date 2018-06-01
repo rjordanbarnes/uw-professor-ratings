@@ -1,15 +1,16 @@
 {
-  "name": "UW MyPlan Enhancer",
-  "version": "1",
+  "name": "UW Professor Ratings",
+  "version": "0.0.1",
   "manifest_version": 2,
   "permissions": [
     "webRequest",
-    "https://myplan.uw.edu/course/api/courses",
+    "https://myplan.uw.edu/course/api/courses/",
+    "https://myplan.uw.edu/course/api/courses/*/details?courseId=*",
     "https://search.mtvnservices.com/typeahead/suggest/*"
   ],
   "content_scripts": [{
-    "matches": ["https://myplan.uw.edu/course/*"],
-    "js": ["jquery-3.3.1.min.js", "main.js"],
+    "matches": ["https://myplan.uw.edu/course/"],
+    "js": ["jquery-3.3.1.min.js", "FindCoursesPage.js", "CoursePage.js", "main.js"],
     "css": ["style.css"]
   }],
   "background": {
