@@ -5,7 +5,7 @@
   "permissions": [
     "webRequest",
     "https://myplan.uw.edu/course/api/courses/",
-    "https://myplan.uw.edu/course/api/courses/*/details?courseId=*",
+    "https://myplan.uw.edu/course/api/courses/*/messages",
     "https://search.mtvnservices.com/typeahead/suggest/*"
   ],
   "content_scripts": [{
