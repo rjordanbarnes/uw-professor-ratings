@@ -10,6 +10,7 @@ chrome.runtime.onMessage.addListener( function(request) {
         cancelAllAPIRequests();
         waitForFindCourses();
     } else if (request.refreshCoursePage) {
+        cancelAllAPIRequests();
         waitForCourse();
     }
 });
@@ -37,7 +38,6 @@ function waitForCourse() {
     waitingForCoursePage = true;
 
     const watch = setInterval(function() {
-        console.log("Watching for course.");
         if ($("div#course-institutions").length) {
             clearInterval(watch);
             waitingForCoursePage = false;

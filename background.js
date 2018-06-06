@@ -1,6 +1,6 @@
 // Tells the main script when an API call is made that would require a refresh.
 chrome.webRequest.onBeforeRequest.addListener(refreshFindCoursesPage, {urls: ["https://myplan.uw.edu/course/api/courses"]});
-chrome.webRequest.onCompleted.addListener(refreshCoursePage, {urls: ["https://myplan.uw.edu/course/api/courses/*/details?courseId=*"]});
+chrome.webRequest.onBeforeRequest.addListener(refreshCoursePage, {urls: ["https://myplan.uw.edu/course/api/courses/*/messages"]});
 
 function refreshFindCoursesPage() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
