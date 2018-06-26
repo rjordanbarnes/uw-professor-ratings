@@ -56,7 +56,7 @@ function cancelAllAPIRequests() {
 // Clicking certain page elements should refresh and/or cancel API requests, for example Filters.
 // Needed because changing filters doesn't cause a network request but does update the list of courses.
 function enableClickHandlers() {
-    const elementsToWaitForFindCourses = ["div.checkbox", "button.btn"];
+    const elementsToWaitForFindCourses = ["div.checkbox", "button.btn", "ul.pagination > li > a"];
 
     elementsToWaitForFindCourses.forEach(function(element) {
         $("body").on("click", element, function() {
