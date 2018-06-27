@@ -17,6 +17,12 @@ div.instructor-name {
     width: 95%;
 }
 
+/* Styles the lodading circle that appears when instructor info is loading */
+span.instructor-loading {
+    background-color: #d9d9d9 !important;
+    margin-left: 20px !important;
+}
+
 /* Remove padding on right side of search results */
 .search-results .list-group .list-group-item {
     padding-right: 0;

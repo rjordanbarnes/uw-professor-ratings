@@ -41,10 +41,10 @@ function insertColumnData() {
 
     if (courseDiv.find("span.course-instructor").length === 0) {
         const courseGenEdReqData = courseDiv.find("span.course-genedureqs");
-        $("<span class='instructor-number-of-reviews'>-</span>").insertAfter(courseGenEdReqData);
-        $("<span class='instructor-level-of-difficulty'>-</span>").insertAfter(courseGenEdReqData);
-        $("<span class='instructor-overall-quality'>-</span>").insertAfter(courseGenEdReqData);
-        $("<span class='course-instructor'>Loading...</span>").insertAfter(courseGenEdReqData);
+        $("<span class='instructor-number-of-reviews'></span>").insertAfter(courseGenEdReqData);
+        $("<span class='instructor-level-of-difficulty'></span>").insertAfter(courseGenEdReqData);
+        $("<span class='instructor-overall-quality'></span>").insertAfter(courseGenEdReqData);
+        $("<span class='course-instructor'></span>").insertAfter(courseGenEdReqData);
     }
 
     const instructorSpan = courseDiv.find("span.course-instructor");
@@ -59,7 +59,7 @@ function insertColumnData() {
     $(instructorOverallQualitySpan).empty();
     $(instructorLevelOfDifficultySpan).empty();
     $(instructorNumberOfReviewsSpan).empty();
-    $(instructorSpan).text("Loading...");
+    $(instructorSpan).addClass("loader spinner-small instructor-loading");
 
     // Get course details from API
     const uwCourseAPI = "https://myplan.uw.edu/course/api/courses/" + courseCode + "/details?courseId=" + courseID;
@@ -85,21 +85,18 @@ function insertColumnData() {
             });
         });
 
-        $(instructorSpan).empty();
-        $(instructorOverallQualitySpan).empty();
-        $(instructorLevelOfDifficultySpan).empty();
-        $(instructorNumberOfReviewsSpan).empty();
+        // Handle case where there aren't any instructors.
+        if (Object.keys(instructors).length === 0)
+            $(instructorSpan).removeClass("loader spinner-small instructor-loading");
+
 
         // Make ajax requests to Rate My Professor
         Object.keys(instructors).forEach(function(instructor) {
 
-            if (instructor === "--") {
-                $(instructorSpan).append("<div class='instructor-name'>" + instructor + "</div>");
-                $(instructorOverallQualitySpan).append("<div class='instructor-oq'>-</div>");
-                $(instructorLevelOfDifficultySpan).append("<div class='instructor-lod'>-</div>");
-                $(instructorNumberOfReviewsSpan).append("<div class='instructor-nor'>-</div>");
+            $(instructorSpan).removeClass("loader spinner-small instructor-loading");
+
+            if (instructor === "--")
                 return;
-            }
 
             // Only uses the first and last name of the instructor in the rate my professor request.
             const instructorNameArray = instructor.split(" ");
@@ -161,6 +158,7 @@ function insertColumnData() {
                     }
                 }
 
+                $(instructorSpan).removeClass("loader spinner-small instructor-loading");
                 $(instructorOverallQualitySpan).append("<div class='instructor-oq " + overallQualityColorClass + "' title='Overall Quality: " + instructors[instructor].overallQuality + "'>" + instructors[instructor].overallQuality + "</div>");
                 $(instructorLevelOfDifficultySpan).append("<div class='instructor-lod " + levelOfDifficultyColorClass + "' title='Level of Difficulty: " + instructors[instructor].levelOfDifficulty + "'>" + instructors[instructor].levelOfDifficulty + "</div>");
                 $(instructorNumberOfReviewsSpan).append("<div class='instructor-nor' title='Number of Reviews: " + instructors[instructor].numberOfReviews + "'>" + instructors[instructor].numberOfReviews + "</div>");
