@@ -1,7 +1,22 @@
 {
   "name": "UW Professor Ratings",
+  "description": "Displays professors and their Rate My Professor ratings on the MyUW course search page.",
   "version": "1.0.0",
+  "author": "Jordan Barnes",
   "manifest_version": 2,
+  "browser_action": {
+    "default_icon": {
+      "128": "images/logo_128.png",
+      "48": "images/logo_48.png",
+      "16": "images/logo_16.png"
+    },
+    "default_title": "UW Professor Ratings"
+  },
+  "icons": {
+    "128": "images/logo_128.png",
+    "48": "images/logo_48.png",
+    "16": "images/logo_16.png"
+  },
   "permissions": [
     "webRequest",
     "https://myplan.uw.edu/course/api/courses/*",
