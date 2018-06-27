@@ -28,9 +28,9 @@ function insertColumnHeaders() {
 
     const genEdHeading = $("div.results-heading span.course-genedureqs");
 
-    $("<span class='instructor-number-of-reviews'>#</span>").insertAfter(genEdHeading);
-    $("<span class='instructor-level-of-difficulty'>LoD</span>").insertAfter(genEdHeading);
-    $("<span class='instructor-overall-quality'>OQ</span>").insertAfter(genEdHeading);
+    $("<span class='instructor-number-of-reviews' title='Number of Reviews'>#</span>").insertAfter(genEdHeading);
+    $("<span class='instructor-level-of-difficulty' title='Level of Difficulty'>LoD</span>").insertAfter(genEdHeading);
+    $("<span class='instructor-overall-quality' title='Overall Quality'>OQ</span>").insertAfter(genEdHeading);
     $("<span class='course-instructor'>Instructor</span>").insertAfter(genEdHeading);
 }
 
@@ -161,9 +161,9 @@ function insertColumnData() {
                     }
                 }
 
-                $(instructorOverallQualitySpan).append("<div class='instructor-oq " + overallQualityColorClass + "'>" + instructors[instructor].overallQuality + "</div>");
-                $(instructorLevelOfDifficultySpan).append("<div class='instructor-lod " + levelOfDifficultyColorClass + "'>" + instructors[instructor].levelOfDifficulty + "</div>");
-                $(instructorNumberOfReviewsSpan).append("<div class='instructor-nor'>" + instructors[instructor].numberOfReviews + "</div>");
+                $(instructorOverallQualitySpan).append("<div class='instructor-oq " + overallQualityColorClass + "' title='Overall Quality: " + instructors[instructor].overallQuality + "'>" + instructors[instructor].overallQuality + "</div>");
+                $(instructorLevelOfDifficultySpan).append("<div class='instructor-lod " + levelOfDifficultyColorClass + "' title='Level of Difficulty: " + instructors[instructor].levelOfDifficulty + "'>" + instructors[instructor].levelOfDifficulty + "</div>");
+                $(instructorNumberOfReviewsSpan).append("<div class='instructor-nor' title='Number of Reviews: " + instructors[instructor].numberOfReviews + "'>" + instructors[instructor].numberOfReviews + "</div>");
             });
         });
     });
