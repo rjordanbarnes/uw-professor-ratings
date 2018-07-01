@@ -39,6 +39,7 @@ function insertColumnData() {
     // Get course guid and code for API request
     const courseDiv = $(this);
 
+    // Inserts custom columns
     if (courseDiv.find("span.course-instructor").length === 0) {
         const courseGenEdReqData = courseDiv.find("span.course-genedureqs");
         $("<span class='instructor-number-of-reviews'></span>").insertAfter(courseGenEdReqData);
@@ -55,13 +56,14 @@ function insertColumnData() {
     const courseCode = courseDiv.find("span.course-code").text();
     const courseTerm = courseDiv.find("span.course-term").text();
 
+    // Resets results
     $(instructorSpan).empty();
     $(instructorOverallQualitySpan).empty();
     $(instructorLevelOfDifficultySpan).empty();
     $(instructorNumberOfReviewsSpan).empty();
     $(instructorSpan).addClass("loader spinner-small instructor-loading");
 
-    // Get course details from API
+    // Get course details from UW API
     const uwCourseAPI = "https://myplan.uw.edu/course/api/courses/" + courseCode + "/details?courseId=" + courseID;
     const request = $.ajax(uwCourseAPI);
     ajaxRequests.push(request);
@@ -71,8 +73,10 @@ function insertColumnData() {
 
         const offeredCourses = response.courseOfferingInstitutionList[0].courseOfferingTermList;
 
+        // Finds the instructor names in the UW API response
         offeredCourses.forEach(function(course) {
             course.activityOfferingItemList.forEach(function(section) {
+                // Handles summer A and B terms
                 const summerTerm = (section.summerTerm === null || section.summerTerm === "Full-term") ? " " : " " + section.summerTerm.slice(0, 1) + " ";
 
                 // Don't show duplicate instructors, quiz sections, or instructors that aren't a part of the same term.
@@ -85,12 +89,12 @@ function insertColumnData() {
             });
         });
 
-        // Handle case where there aren't any instructors.
+        // Handles case where there aren't any instructors.
         if (Object.keys(instructors).length === 0)
             $(instructorSpan).removeClass("loader spinner-small instructor-loading");
 
 
-        // Make ajax requests to Rate My Professor
+        // Make ajax requests to Rate My Professor for each instructor found in the UW API response
         Object.keys(instructors).forEach(function(instructor) {
 
             $(instructorSpan).removeClass("loader spinner-small instructor-loading");
@@ -98,7 +102,7 @@ function insertColumnData() {
             if (instructor === "--")
                 return;
 
-            // Only uses the first and last name of the instructor in the rate my professor request.
+            // Only uses the first and last name of the instructor in the rate my professor request. Also only searches the UW Seattle campus
             const instructorNameArray = instructor.split(" ");
             const instructorFirstName = instructorNameArray[0].substring(0, 6); // Only uses first 6 letters of the first name to increase hits.
             const instructorLastName = instructorNameArray[instructorNameArray.length - 1];
@@ -124,6 +128,7 @@ function insertColumnData() {
                     $(instructorSpan).append("<div class='instructor-name'><a href='http://www.ratemyprofessors.com/ShowRatings.jsp?tid=" +  response.pk_id + "' target='_blank'>" + instructor + "</a></div>");
                 }
 
+                // Handles cases where there aren't any reviews yet for the professor.
                 if (instructors[instructor].overallQuality === 0 || isNaN(instructors[instructor].overallQuality))
                     instructors[instructor].overallQuality = "-";
 
@@ -133,7 +138,7 @@ function insertColumnData() {
                 let overallQualityColorClass = "";
                 let levelOfDifficultyColorClass = "";
 
-                // Adds color. RMP is on scale from 1-5
+                // Adds color for Overall Quality. RMP is on scale from 1-5
                 if (!isNaN(instructors[instructor].overallQuality)) {
                     if (instructors[instructor].overallQuality >= 4) {
                         overallQualityColorClass = "rmp-best";
@@ -146,6 +151,7 @@ function insertColumnData() {
                     }
                 }
 
+                // Adds color for Level of Difficulty. RMP is on scale from 1-5
                 if (!isNaN(instructors[instructor].levelOfDifficulty)) {
                     if (instructors[instructor].levelOfDifficulty >= 4) {
                         levelOfDifficultyColorClass = "rmp-bad";
@@ -158,6 +164,7 @@ function insertColumnData() {
                     }
                 }
 
+                // Inserts instructor data.
                 $(instructorSpan).removeClass("loader spinner-small instructor-loading");
                 $(instructorOverallQualitySpan).append("<div class='instructor-oq " + overallQualityColorClass + "' title='Overall Quality: " + instructors[instructor].overallQuality + "'>" + instructors[instructor].overallQuality + "</div>");
                 $(instructorLevelOfDifficultySpan).append("<div class='instructor-lod " + levelOfDifficultyColorClass + "' title='Level of Difficulty: " + instructors[instructor].levelOfDifficulty + "'>" + instructors[instructor].levelOfDifficulty + "</div>");
