@@ -71,6 +71,10 @@ function insertColumnData() {
     request.done(function(response) {
         let instructors = {};
 
+        // Course Catalog search isn't officially supported.
+        if (response.courseOfferingInstitutionList.length === 0)
+            $(instructorSpan).removeClass("loader spinner-small instructor-loading");
+
         const offeredCourses = response.courseOfferingInstitutionList[0].courseOfferingTermList;
 
         // Finds the instructor names in the UW API response
