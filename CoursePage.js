@@ -12,7 +12,8 @@ function onCoursePageFound() {
         if (instructorFirstName.includes("--"))
             return;
 
-        const rateMyProfessorAPI = "https://search.mtvnservices.com/typeahead/suggest/?solrformat=true&rows=1&q=" + instructorFirstName + " " + instructorLastName + "+AND+schoolid_s%3A1530&defType=edismax&qf=teacherfirstname_t%5E2000+teacherlastname_t%5E2000+teacherfullname_t%5E2000+autosuggest&bf=pow(total_number_of_ratings_i%2C2.1)&sort=total_number_of_ratings_i+desc&siteName=rmp&rows=1&start=0&fl=pk_id+teacherfirstname_t+teacherlastname_t+total_number_of_ratings_i+averageratingscore_rf+schoolid_s+averageeasyscore_rf&fq";
+        const schoolID = uwbPrefixes.indexOf(instructorElement[0].ownerDocument.title.replace(/ \d*\D*$/g, "")) == -1 ? 1530 : 4466;
+        const rateMyProfessorAPI = "https://search.mtvnservices.com/typeahead/suggest/?solrformat=true&rows=1&q=" + instructorFirstName + " " + instructorLastName + "+AND+schoolid_s%3A" + schoolID + "&defType=edismax&qf=teacherfirstname_t%5E2000+teacherlastname_t%5E2000+teacherfullname_t%5E2000+autosuggest&bf=pow(total_number_of_ratings_i%2C2.1)&sort=total_number_of_ratings_i+desc&siteName=rmp&rows=1&start=0&fl=pk_id+teacherfirstname_t+teacherlastname_t+total_number_of_ratings_i+averageratingscore_rf+schoolid_s+averageeasyscore_rf&fq";
         const professorURL = 'http://www.ratemyprofessors.com/ShowRatings.jsp?tid=';
         const request = $.ajax(rateMyProfessorAPI);
 

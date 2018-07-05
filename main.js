@@ -1,6 +1,7 @@
 let waitingForFindCoursesPage = false;
 let waitingForCoursePage = false;
 let ajaxRequests = [];
+let uwbPrefixes = ["B ACCT", "B BUS", "B BECN", "B BSKL", "ELCBUS", "B EDUC", "LEDE", "B ARAB", "B CORE", "B CHIN", "BJAPAN", "BKOREA", "B LEAD", "B MATH", "B SPAN", "B CUSP", "B WRIT", "BISAES", "BISCP", "BCWRIT", "BCULST", "BISCLA", "BEARTH", "BES", "BISGWS", "BISGST", "BISIA", "BISSTS", "BIS", "BISSKL", "BISLEP", "BISMCS", "BPOLST", "BISSEB", "B IMD", "B HLTH", "BHS", "B NURS", "STEM", "B BIO", "BCONSC", "CSS", "CSSSKL", "B CE", "B EE", "B ENGR", "B ME", "STMATH", "B IMD", "B CHEM", "B CLIM", "B PHYS", "BST"];
 
 enableClickHandlers();
 

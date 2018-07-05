@@ -110,7 +110,9 @@ function insertColumnData() {
             const instructorNameArray = instructor.split(" ");
             const instructorFirstName = instructorNameArray[0].substring(0, 6); // Only uses first 6 letters of the first name to increase hits.
             const instructorLastName = instructorNameArray[instructorNameArray.length - 1];
-            const rateMyProfessorAPI = "https://search.mtvnservices.com/typeahead/suggest/?solrformat=true&rows=1&q=" + instructorFirstName + " " + instructorLastName + "+AND+schoolid_s%3A1530&defType=edismax&qf=teacherfirstname_t%5E2000+teacherlastname_t%5E2000+teacherfullname_t%5E2000+autosuggest&bf=pow(total_number_of_ratings_i%2C2.1)&sort=total_number_of_ratings_i+desc&siteName=rmp&rows=1&start=0&fl=pk_id+teacherfirstname_t+teacherlastname_t+total_number_of_ratings_i+averageratingscore_rf+schoolid_s+averageeasyscore_rf&fq";
+
+            const schoolID = uwbPrefixes.indexOf(courseCode.replace(/ \d*$/g, "")) == -1 ? 1530 : 4466;
+            const rateMyProfessorAPI = "https://search.mtvnservices.com/typeahead/suggest/?solrformat=true&rows=1&q=" + instructorFirstName + " " + instructorLastName + "+AND+schoolid_s%3A" + schoolID + "&defType=edismax&qf=teacherfirstname_t%5E2000+teacherlastname_t%5E2000+teacherfullname_t%5E2000+autosuggest&bf=pow(total_number_of_ratings_i%2C2.1)&sort=total_number_of_ratings_i+desc&siteName=rmp&rows=1&start=0&fl=pk_id+teacherfirstname_t+teacherlastname_t+total_number_of_ratings_i+averageratingscore_rf+schoolid_s+averageeasyscore_rf&fq";
 
             const request = $.ajax(rateMyProfessorAPI);
             ajaxRequests.push(request);
