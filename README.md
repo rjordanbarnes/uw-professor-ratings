@@ -1,7 +1,7 @@
 # UW Professor Ratings
 Chrome extension that displays professors and their Rate My Professor ratings on the UW MyPlan course search page.
 
-**[Install It Here](https://chrome.google.com/webstore/detail/uw-professor-ratings/lendnnjadkadbgkdgpankojeehcbglba?hl=en&)**
+Note: The extension has been removed from the Chrome Web Store by request of RateMyProfessor
 
 Easily find University of Washington courses taught by highly rated professors without opening fifty tabs!
 
